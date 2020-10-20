@@ -1,0 +1,23 @@
+imshow(ima1);
+c = [128 128 300 300];
+r = [21 75 75 21];
+BW = uint8(roipoly(ima1,c,r));
+im = ima1 .* BW;
+figure;
+imshow(im);title('ROI');
+figure;
+imhist(im);title('histogram of ROI');
+xlabel('color');ylabel('number');
+grid on;
+%figure, imshow(ima1), figure, imshow(im)
+%imhist();
+%imshow(x);
+[counts,binLocations] = imhist(im);
+pdf=counts/numel(im);
+figure;
+plot(binLocations, pdf, 'b-', 'LineWidth', 2);title('PDF');
+xlabel('color');ylabel('probability');
+grid on;
+a = medfilt2(ima1);
+figure;
+imshow(a);title('After');
